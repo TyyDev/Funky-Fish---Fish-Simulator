@@ -13,7 +13,8 @@ public class FishMovement : MonoBehaviour
     private Vector2 movement;
     private float timeLeft;
     public float speed = 15.0f;
-
+    public Transform target;
+    public Food foodTrigger;
 
     void Start()
     {
@@ -23,6 +24,16 @@ public class FishMovement : MonoBehaviour
 
     void Update()
     {
+
+
+        if (foodTrigger == true)
+        {
+            Debug.Log("Attracted!");
+            timeLeft = -1;
+            var step = speed * Time.deltaTime; 
+            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            timeLeft = 0;
+        }
 
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
